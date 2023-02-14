@@ -15,7 +15,7 @@
 
         <ion-tab-button tab="tab3" href="/tabs/tab3">
           <ion-icon :icon="star" />
-          <ion-label>Algo más bonito</ion-label>
+          <ion-label>Algo mejor</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -26,8 +26,7 @@
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { ellipse, star, triangle } from 'ionicons/icons';
 export default {
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: 'Tabs',
+    name: 'TabsPage',
     components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet},
     setup() {
       return { ellipse, star, triangle};
