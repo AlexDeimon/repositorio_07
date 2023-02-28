@@ -1,0 +1,7 @@
+{
+  "name": "App_02_mBridge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
