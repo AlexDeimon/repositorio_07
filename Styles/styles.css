@@ -1,0 +1,74 @@
+body{
+    background-color: #1d232f;
+    font-family: 'Oswald', sans-serif;
+}
+
+main{
+    display: grid;
+}
+
+p, 
+.lista{
+    font-size: 20px;
+    font-weight: lighter;
+    margin: 0% 3% 1%;
+    color: #ffffff;
+}
+
+.header{
+    background-color: black;
+}
+
+.article{
+    background-color: #2e2e2e;
+    border: 1px solid #ffffff;
+}
+
+.titulo2{
+    font-size: xx-large;
+}
+
+.titulos{
+    margin-left: 3%;
+    margin-right: 3%;
+    display: inline-block;
+}
+
+.boton{
+    display: block;
+    width: 9ch;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    text-decoration: none;
+    color: #2e2e2e;
+    background-color: #2fdf75;
+    border: 10px solid #2e2e2e;
+}
+
+.hidden{
+    display: none;
+}
+
+.titulo1, 
+.lista1{
+    color: white;
+}
+
+.resaltado{
+    color: #2fdf75;
+    font-weight: bold;
+}
+
+.lista li{
+    line-height: 1.5;
+}
+
+.article h2{
+    color: #2fdf75;
+}
+
+.lista li::marker{
+    font-weight: bold;
+    color: #2fdf75;
+}
