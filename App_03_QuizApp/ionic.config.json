@@ -1,0 +1,7 @@
+{
+  "name": "App_03_QuizApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
