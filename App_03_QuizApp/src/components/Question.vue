@@ -14,18 +14,18 @@
             </div>
             <div class="post-answer" :style="[roundEnded ? { display: 'block' } : { display: 'none' }]">
                 <p class="message">{{ message }}</p>
-                <button @click="goToNextQuestion" v-html="[index == numberOfQuestions - 1 ? 'See results!' : 'Next question',]"></button>
+                <ion-button @click="goToNextQuestion"><label v-html="[index == numberOfQuestions - 1 ? 'Resultados' : 'Siguiente pregunta',]"></label></ion-button>
             </div>
         </section>
     </ion-page>
 </template>
 <script>
-import { IonPage } from "@ionic/vue";
+import { IonPage, IonButton } from "@ionic/vue";
 import { defineComponent } from 'vue';
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Question",
-    components: {IonPage},
+    components: {IonPage, IonButton},
     props: {
     quizData: Object,
   },
@@ -58,9 +58,7 @@ export default defineComponent({
       this.numberOfQuestions = questions.length;
       // Put all the answers in an array to shuffle them later
       this.answers.push(questions[index].correct_answer);
-      questions[index].incorrect_answers.forEach((answer) => {
-        this.answers.push(answer);
-      });
+      questions[index].incorrect_answers.forEach((answer) => { this.answers.push(answer); });
       this.correctAnswer = questions[index].correct_answer;
       this.questionText = questions[index].question;
       this.question1 = this.getRandomAnswer();
@@ -75,38 +73,28 @@ export default defineComponent({
       return answer;
     },
     countdown() {
-      this.secondsLeft = 45;
+      this.secondsLeft = 30;
       this.timer = setInterval(() => {
         if (!this.userAnswered) {
           if (this.secondsLeft > 0) this.secondsLeft--;
           else if (this.secondsLeft <= 0 || this.roundEnded) this.stopTimer();
-          if (this.secondsLeft.toString().length < 2)
-            this.secondsLeft = `0${this.secondsLeft}`;
+          if (this.secondsLeft.toString().length < 2) this.secondsLeft = `0${this.secondsLeft}`;
         }
         if (this.secondsLeft <= 0 && !this.userAnswered) {
-          this.message = "Time ran out! No points in this round.";
+          this.message = "¡SE ACABÓ EL TIEMPO!";
           this.roundEnded = true;
         }
       }, 1000);
     },
-    stopTimer() {
-      clearInterval(this.timer);
-    },
+    stopTimer() { clearInterval(this.timer); },
     checkAnswer(event) {
       if (!this.roundEnded) {
         this.userAnswered = true;
         this.roundEnded = true;
-        this.isUserAnswerCorrect =
-          event.target.innerText == this.correctAnswer ? true : false;
-        this.message = this.isUserAnswerCorrect
-          ? "Good job! 🐢"
-          : "Better luck next time.";
+        this.isUserAnswerCorrect = event.target.innerText == this.correctAnswer ? true : false;
+        this.message = this.isUserAnswerCorrect ? "¡CORRECTO!" : "¡INCORRECTO¡";
         if (this.isUserAnswerCorrect) this.correctAnswers++;
-        setTimeout(() => {
-          event.target.style.background = this.isUserAnswerCorrect
-            ? "#00e900"
-            : "#ff4a4a";
-        }, 200);
+        setTimeout(() => { event.target.style.background = this.isUserAnswerCorrect ? "#00e900" : "#ff4a4a"; }, 200);
       }
     },
     goToNextQuestion() {
