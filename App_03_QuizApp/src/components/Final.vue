@@ -1,10 +1,9 @@
 <template>
     <ion-page>
-        <section class="final">
-            <h2>{{ message }}</h2>
+        <section class="final contenedor1">
             <p v-html="result"></p>
             <div>
-                <p class="answers-result">{{ correctAnswers }}/{{ numberOfQuestions }}</p>
+                <p class="answers-result">Obtuviste: {{ points }} puntos</p>
             </div>
             <ion-button @click="resetGame">VOLVER A INICIO</ion-button>
         </section>
@@ -13,52 +12,35 @@
 <script>
 import { IonPage, IonButton } from "@ionic/vue";
 import { defineComponent } from 'vue';
+import axios  from 'axios';
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Final",
     components: {IonPage, IonButton},
     props: {
-        correctAnswers: Number,
-        numberOfQuestions: Number,
-    },
-    data() {
-        return {
-        message: "",
-        result: "",
-        correctAnswersPercentage: 0,
-        wrongAnswersPercentage: 0,
-        };
-    },
-    mounted() {
-        this.calculatePercentages();
-        this.changeResultText();
+        points: Number,
+        user: String,
+        quizName: String
     },
     methods: {
-        calculatePercentages() {
-            this.correctAnswersPercentage = (this.correctAnswers / this.numberOfQuestions) * 100;
-            this.wrongAnswersPercentage = 100 - this.correctAnswersPercentage;
-        },
-        changeResultText() {
-            if (this.correctAnswersPercentage >= 0 && this.correctAnswersPercentage <= 30) {
-                this.message = "Muy dificil";
-                this.result = `Solo tuviste ${this.correctAnswersPercentage}% de las respuestas correctas. Intentalo de nuevo...`;
-            } else if (this.correctAnswersPercentage > 30 && this.correctAnswersPercentage < 60) {
-                this.message = "No estuvo tan mal";
-                this.result = `Tuviste ${this.correctAnswersPercentage}% de las respuestas correctas.. Puedes mejorar si intentas de nuevo!`;
-            } else if (this.correctAnswersPercentage >= 60 && this.correctAnswersPercentage < 80) {
-                this.message = "¡Bien hecho!";
-                this.result = `Tuviste ${this.correctAnswersPercentage}% de las respuestas correctas. ¡Muy buen puntaje!`;
-            } else if ( this.correctAnswersPercentage >= 80 && this.correctAnswersPercentage < 90) {
-                this.message = "¡Muy bien!";
-                this.result = `¡Tuviste ${this.correctAnswersPercentage}% de las respuestas correctas!`;
-            } else if (this.correctAnswersPercentage >= 90) {
-                this.message = "Perfecto!";
-                this.result = `!Lograste contestar el ${this.correctAnswersPercentage}% de las preguntas!`;
-            }
+        userPoints(){
+            const name = this.quizName;
+            const user = this.user;
+            axios.put(`https://pwa-movil-default-rtdb.firebaseio.com/quizes/${name}/usuarios/${user}.json`, {
+                nombre: user,
+                puntos: this.points
+            });   
         },
         resetGame() {
+            this.userPoints();
             this.$emit("resetGame");
         },
     },
 });
 </script>
+<style>
+.answers-result{
+    font-family: 'VT323', monospace;
+    font-size: 50px;
+}
+</style>
