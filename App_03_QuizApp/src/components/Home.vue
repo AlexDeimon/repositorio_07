@@ -155,6 +155,11 @@ export default defineComponent({
                     this.showAlert('ERROR', 'EL QUIZ YA EXISTE');
                     this.quiz.nombre = null;
                     this.selectedFile = false;
+                } else if (!Object.prototype.hasOwnProperty.call(newJson[0], 'pregunta') || !Object.prototype.hasOwnProperty.call(newJson[0], 'respuestaCorrecta') || !Object.prototype.hasOwnProperty.call(newJson[0], 'respuestaIncorrecta1') || !Object.prototype.hasOwnProperty.call(newJson[0], 'respuestaIncorrecta2') || !Object.prototype.hasOwnProperty.call(newJson[0], 'respuestaIncorrecta3')) {
+                    document.getElementById('submitquiz').reset();
+                    this.showAlert('ERROR', 'LA PRIMER FILA DEL DOCUMENTO DEBE TENER EL FORMATO: pregunta,respuestaCorrecta,respuestaIncorrecta1,respuestaIncorrecta2,respuestaIncorrecta3');
+                    this.quiz.nombre = null;
+                    this.selectedFile = false;
                 } else if(newJson.length < 10) {
                     document.getElementById('submitquiz').reset();
                     this.showAlert('ERROR', 'VERIFICA QUE EL QUIZ TENGA AL MENOS 10 PREGUNTAS');
