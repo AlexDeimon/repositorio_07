@@ -19,13 +19,13 @@ p,
     background-color: black;
 }
 
-.article{
-    background-color: #2e2e2e;
-    border: 1px solid #ffffff;
-}
-
 .titulo2{
     font-size: xx-large;
+}
+
+.resaltado{
+    color: #2fdf75;
+    font-weight: bold;
 }
 
 .titulos{
@@ -41,9 +41,6 @@ p,
     margin-right: auto;
     padding: 10px;
     text-decoration: none;
-    color: #2e2e2e;
-    background-color: #2fdf75;
-    border: 10px solid #2e2e2e;
 }
 
 .hidden{
@@ -55,8 +52,31 @@ p,
     color: white;
 }
 
-.resaltado{
-    color: #2fdf75;
+.article{
+    background-color: #2e2e2e;
+    border: 1px solid #ffffff;
+}
+
+.boton1{
+    color: #2e2e2e;
+    background-color: #2fdf75;
+    border: 10px solid #2e2e2e;
+}
+
+.boton2{
+    color: #eeeeee;
+    background-color: #008fd4;
+    border: 10px solid #2e2e2e;
+}
+
+.boton3{
+    color: #2e2e2e;
+    background-color: #ffc409;
+    border: 10px solid #2e2e2e;
+}
+
+.resaltado2{
+    color: #008fd4;
     font-weight: bold;
 }
 
@@ -64,11 +84,29 @@ p,
     line-height: 1.5;
 }
 
-.article h2{
-    color: #2fdf75;
+.ejercicio1 h2{
+    color: #0abf53;
+}
+
+.ejercicio2 h2,
+.ejercicio3 h2{
+    color: #008fd4;
 }
 
 .lista li::marker{
     font-weight: bold;
-    color: #2fdf75;
+}
+
+.lista1 li::marker{
+    color: #0abf53;
+}
+
+.lista2 li::marker,
+.lista3 li:nth-child(odd)::marker{
+    color: #008fd4;
+}
+
+.lista3 li:nth-child(even)::marker,
+.ejercicio3 h2 span{
+    color: #ffc409;
 }
